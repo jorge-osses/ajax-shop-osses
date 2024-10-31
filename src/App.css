@@ -1,0 +1,20 @@
+.cartWidgetContainer{
+    display: flex;
+    justify-content: space-between;
+    align-items:center;
+    
+}
+
+.cartIcon{
+    width: 3rem;
+}
+
+.cartCounter{
+    padding-left: 1rem;
+    color: #fc0000;
+    font-weight: 500;
+}
+
+a{
+    text-decoration: none;
+}
