@@ -1,23 +1,36 @@
-import ItemCount from './ItemCount'
+import React, {useEffect, useState} from 'react'
+import ItemList from './ItemList'
+import { getProducts } from '../mock/data'
+import { useParams } from 'react-router-dom'
 
 const ItemListContainer = ({greeting}) => {
 
-    const onAdd = (cantidad) => {
-        // agregar validacion
-        if(cantidad==1){
-        alert(`Agregaste al carrito ${cantidad} producto`)
-        }else if(cantidad<1){
-        alert(`No hay productos para agregar =(`)            
-        }else {
-        alert(`Agregaste al carrito ${cantidad} productos`)            
-        }
-    }
+    const [products, setProducts] = useState([])
+    const [loading, setLoading] = useState(false)
+    const {category} = useParams()
+
+    
+    useEffect(()=>{
+        setLoading(true)
+        getProducts()
+        .then((res)=> {
+            if (category){
+                setProducts(res.filter((prod) => prod.category === category))
+            } else {
+                setProducts(res)
+            }
+        })
+        .catch((error)=> console.log(error))
+        .finally(()=> setLoading(false))
+    },[category])
 
     return(
         <div>
             <h1 className="titleListContainer">{greeting}</h1>
+            {/* <ItemList products={products}/> */}
 
-            <ItemCount stock={10} onAdd = {onAdd}/>
+
+            {loading ? <p>Cargando...</p>: <ItemList products={products}/>}
         </div>
     )
 }

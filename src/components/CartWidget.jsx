@@ -5,11 +5,7 @@ const CartWidget = ({counter}) => {
     return(
         <>
             <TiShoppingCart fontSize={"1.7rem"} color="black"/>
-            <Badge bg="warning" text="light">8</Badge>
-            {/* <div className="cartWidgetContainer">
-                <img src="./shopping-cart.png" alt="cart" className="cartIcon" />
-                <p className="cartCounter">{counter}</p>
-            </div> */}
+            <Badge bg="warning" text="light">{counter}</Badge>
         </>
     )
 }
